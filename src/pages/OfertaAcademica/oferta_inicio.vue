@@ -91,6 +91,8 @@ import {
   //OrderedTable,
 } from "@/components";
 
+import axios from "axios";
+
 export default {
   components: {
     StatsCard,
@@ -112,7 +114,22 @@ export default {
       console.log(data);
 
       this.pensums = data;
+    },
+    async POSTPensums({ data }) {
+      // GET request using fetch with async/await
+      const response = await fetch("http://127.0.0.1:8000/api/pensum?id=1", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+      const data = await response.json();
+      console.log(data);
+
+      this.pensums = data;
     }
+
   },
 
   mounted() {
